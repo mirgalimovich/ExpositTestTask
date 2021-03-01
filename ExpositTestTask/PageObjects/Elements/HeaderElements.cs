@@ -1,10 +1,10 @@
 ﻿using System.Threading;
-using ExpositTestTask.PageObject.Pages;
+using ExpositTestTask.PageObjects.Pages;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using SeleniumExtras.PageObjects;
 
-namespace ExpositTestTask.PageObject.Elements
+namespace ExpositTestTask.PageObjects.Elements
 {
     public class HeaderElements
     {

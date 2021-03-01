@@ -1,5 +1,5 @@
-using ExpositTestTask.PageObject.Elements;
-using ExpositTestTask.PageObject.Pages;
+using ExpositTestTask.PageObjects.Elements;
+using ExpositTestTask.PageObjects.Pages;
 using FluentAssertions;
 using NUnit.Framework;
 using OpenQA.Selenium;
@@ -8,12 +8,13 @@ using OpenQA.Selenium.Chrome;
 namespace ExpositTestTask
 {
     [TestFixture]
-    public class OrangeHrmTests
+    [Category("Employee creation")]
+    public class OrangeHrmUiTests
     {
         private IWebDriver _driver;
 
         [OneTimeSetUp]
-        public void Initialize()
+        public void Init()
         {
             _driver = new ChromeDriver();
             _driver.Manage().Window.Maximize();
@@ -22,21 +23,15 @@ namespace ExpositTestTask
         [Test]
         public void NewEmployeeCorrectlyCreated()
         {
-            var loginPage = new LoginPage(_driver);
-            loginPage.GoToPage();
-            loginPage.EnterLogin();
-            loginPage.EnterPassword();
-            loginPage.Login();
+            new LoginPage(_driver).Login();
 
-            var headerElement = new HeaderElements(_driver);
-            var addEmployeePage = headerElement.GoToAddEmployeePage();
+            var addEmployeePage = new HeaderElements(_driver).GoToAddEmployeePage();
 
             var generatedEmployeeId = addEmployeePage.GetEmployeeId();
             var generatedFirstName = CommonMethods.GenerateRandomString();
             var generatedLastName = CommonMethods.GenerateRandomString();
 
-            addEmployeePage.EnterFirstName(generatedFirstName);
-            addEmployeePage.EnterLastName(generatedLastName);
+            addEmployeePage.EnterRequiredData(generatedFirstName, generatedLastName);
             var personalDetailsPage = addEmployeePage.Save();
 
             var actualFirstName = personalDetailsPage.GetFirstName();
@@ -51,11 +46,7 @@ namespace ExpositTestTask
         [Test]
         public void CreatedEmployeeSuccessfullyAddedToEmployeeList()
         {
-            var loginPage = new LoginPage(_driver);
-            loginPage.GoToPage();
-            loginPage.EnterLogin();
-            loginPage.EnterPassword();
-            loginPage.Login();
+            new LoginPage(_driver).Login();
 
             var headerElement = new HeaderElements(_driver);
             var addEmployeePage = headerElement.GoToAddEmployeePage();
@@ -63,8 +54,7 @@ namespace ExpositTestTask
             var generatedFirstName = CommonMethods.GenerateRandomString();
             var generatedLastName = CommonMethods.GenerateRandomString();
 
-            addEmployeePage.EnterFirstName(generatedFirstName);
-            addEmployeePage.EnterLastName(generatedLastName);
+            addEmployeePage.EnterRequiredData(generatedFirstName, generatedLastName);
             var personalDetailsPage = addEmployeePage.Save();
 
             var firstName = personalDetailsPage.GetFirstName();
@@ -82,7 +72,7 @@ namespace ExpositTestTask
         }
 
         [OneTimeTearDown]
-        public void TearDown()
+        public void CleanUp()
         {
             _driver.Close();
         }

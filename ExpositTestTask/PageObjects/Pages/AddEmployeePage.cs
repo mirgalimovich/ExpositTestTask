@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 
-namespace ExpositTestTask.PageObject.Pages
+namespace ExpositTestTask.PageObjects.Pages
 {
     public class AddEmployeePage
     {
@@ -33,6 +33,12 @@ namespace ExpositTestTask.PageObject.Pages
         public void EnterLastName(string lastName)
         {
             _lastNameInputField.SendKeys(lastName);
+        }
+
+        public void EnterRequiredData(string firstName, string lastName)
+        {
+            EnterFirstName(firstName);
+            EnterLastName(lastName);
         }
 
         public string GetEmployeeId()

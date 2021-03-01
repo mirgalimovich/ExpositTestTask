@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 
-namespace ExpositTestTask.PageObject.Pages
+namespace ExpositTestTask.PageObjects.Pages
 {
     public class PersonalDetailsPage
     {

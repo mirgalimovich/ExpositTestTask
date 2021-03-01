@@ -2,7 +2,7 @@
 using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 
-namespace ExpositTestTask.PageObject.Pages
+namespace ExpositTestTask.PageObjects.Pages
 {
     public class LoginPage
     {
@@ -57,6 +57,9 @@ namespace ExpositTestTask.PageObject.Pages
 
         public void Login()
         {
+            GoToPage();
+            EnterLogin();
+            EnterPassword();
             _loginButton.Click();
         }
     }
